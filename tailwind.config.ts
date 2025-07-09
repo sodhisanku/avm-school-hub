@@ -61,6 +61,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				school: {
+					primary: 'hsl(var(--school-primary))',
+					'primary-dark': 'hsl(var(--school-primary-dark))',
+					secondary: 'hsl(var(--school-secondary))',
+					'text-light': 'hsl(var(--school-text-light))',
+					'bg-overlay': 'hsl(var(--school-bg-overlay))'
 				}
 			},
 			borderRadius: {

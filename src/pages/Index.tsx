@@ -39,29 +39,6 @@ const Index = () => {
     }
   ];
 
-  const features = [
-    {
-      icon: BookOpen,
-      title: "गुणवत्तापूर्ण शिक्षा",
-      description: "राज्य शिक्षा मानकों के अनुसार व्यापक पाठ्यक्रम"
-    },
-    {
-      icon: Users,
-      title: "अनुभवी शिक्षक",
-      description: "योग्य और समर्पित शिक्षक जो छात्रों की सफलता के लिए प्रतिबद्ध हैं"
-    },
-    {
-      icon: Award,
-      title: "उत्कृष्टता पुरस्कार",
-      description: "शैक्षणिक और सह-पाठ्यक्रम उपलब्धियों के लिए मान्यता प्राप्त"
-    },
-    {
-      icon: Calendar,
-      title: "समग्र विकास",
-      description: "शिक्षा, खेल, कला और चरित्र निर्माण पर ध्यान"
-    }
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -74,18 +51,18 @@ const Index = () => {
         <div className="absolute inset-0 bg-school-bg-overlay/40"></div>
         <div className="relative z-10 container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-6xl md:text-8xl font-bold text-school-text-light mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold text-school-text-light mb-6">
               आस्था विद्या मंदिर में आपका स्वागत है
             </h1>
             <p className="text-xl md:text-2xl text-school-text-light/90 mb-8">
               Nurturing Young Minds • Building Future Leaders • Excellence in Education Since 1985
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-school-secondary hover:bg-school-secondary/90 text-primary font-semibold">
-                <Link to="/admission">प्रवेश के लिए आवेदन करें</Link>
+              <Button asChild size="lg" className="bg-school-secondary hover:bg-school-secondary/90 text-primary font-semibold px-8 py-4 text-lg">
+                <Link to="/admission">Apply For Admission</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-school-text-light text-school-text-light hover:bg-school-text-light hover:text-school-primary">
-                <Link to="/about">और जानें</Link>
+              <Button asChild variant="outline" size="lg" className="border-school-text-light text-school-text-light hover:bg-school-text-light hover:text-school-primary px-8 py-4 text-lg">
+                <Link to="/about">Know More</Link>
               </Button>
             </div>
           </div>
@@ -98,8 +75,8 @@ const Index = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {quickFeatures.map((feature, index) => (
               <div key={index} className="text-center">
-                <div className={`mx-auto w-20 h-20 rounded-full ${feature.color} flex items-center justify-center mb-4`}>
-                  <feature.icon className="h-10 w-10 text-school-text-light" />
+                <div className={`mx-auto w-24 h-24 rounded-full ${feature.color} flex items-center justify-center mb-4 hover:scale-105 transition-transform cursor-pointer`}>
+                  <feature.icon className="h-12 w-12 text-school-text-light" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
                 <p className="text-sm text-muted-foreground">{feature.description}</p>
@@ -109,39 +86,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Key Features */}
-      <section className="py-16 bg-muted">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              आस्था विद्या मंदिर को क्यों चुनें?
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              हम असाधारण शिक्षा प्रदान करने के लिए प्रतिबद्ध हैं जो छात्रों को जीवन में सफलता के लिए तैयार करती है।
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="mx-auto bg-school-primary/10 p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4">
-                    <feature.icon className="h-8 w-8 text-school-primary" />
-                  </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Announcements & Quick Info */}
-      <section className="py-16">
+      <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Announcements */}
@@ -150,18 +96,18 @@ const Index = () => {
                 <CardHeader>
                   <div className="flex items-center space-x-2">
                     <Bell className="h-5 w-5 text-school-primary" />
-                    <CardTitle>नवीनतम घोषणाएं</CardTitle>
+                    <CardTitle className="text-xl">नवीनतम घोषणाएं</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     {announcements.map((announcement, index) => (
-                      <div key={index} className="flex items-start space-x-4 p-4 bg-muted rounded-lg">
-                        <div className="bg-school-primary text-school-text-light px-2 py-1 rounded text-xs font-semibold min-w-max">
+                      <div key={index} className="flex items-start space-x-4 p-4 bg-background rounded-lg hover:shadow-md transition-shadow">
+                        <div className="bg-school-primary text-school-text-light px-3 py-1 rounded-full text-xs font-semibold min-w-max">
                           {announcement.type}
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-semibold text-foreground">{announcement.title}</h4>
+                          <h4 className="font-semibold text-foreground mb-1">{announcement.title}</h4>
                           <p className="text-sm text-muted-foreground">{announcement.date}</p>
                         </div>
                       </div>
@@ -178,7 +124,7 @@ const Index = () => {
             <div>
               <Card>
                 <CardHeader>
-                  <CardTitle>त्वरित संपर्क</CardTitle>
+                  <CardTitle className="text-xl">त्वरित संपर्क</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center space-x-3">
@@ -211,7 +157,7 @@ const Index = () => {
               {/* Principal's Message */}
               <Card className="mt-6">
                 <CardHeader>
-                  <CardTitle>प्रधानाचार्य का संदेश</CardTitle>
+                  <CardTitle className="text-xl">प्रधानाचार्य का संदेश</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-4">
@@ -230,19 +176,19 @@ const Index = () => {
       <section className="py-16 bg-school-primary text-school-text-light">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
+            <div className="hover:scale-105 transition-transform">
               <div className="text-4xl font-bold mb-2">1200+</div>
               <div className="text-school-text-light/80">छात्र</div>
             </div>
-            <div>
+            <div className="hover:scale-105 transition-transform">
               <div className="text-4xl font-bold mb-2">85+</div>
               <div className="text-school-text-light/80">शिक्षक</div>
             </div>
-            <div>
+            <div className="hover:scale-105 transition-transform">
               <div className="text-4xl font-bold mb-2">40+</div>
               <div className="text-school-text-light/80">वर्षों की उत्कृष्टता</div>
             </div>
-            <div>
+            <div className="hover:scale-105 transition-transform">
               <div className="text-4xl font-bold mb-2">95%</div>
               <div className="text-school-text-light/80">सफलता दर</div>
             </div>

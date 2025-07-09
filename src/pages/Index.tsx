@@ -66,7 +66,7 @@ const Index = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section 
-        className="relative h-screen flex items-center justify-center bg-cover bg-center"
+        className="relative h-screen flex items-center justify-center bg-cover bg-center hero-bg-animate"
         style={{
           backgroundImage: `linear-gradient(rgba(72, 61, 139, 0.8), rgba(72, 61, 139, 0.9)), url(${schoolHeroBg})`
         }}

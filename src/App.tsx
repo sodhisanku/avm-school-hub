@@ -31,17 +31,40 @@ const App = () => (
           <main className="flex-1">
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/welcome" element={<Index />} />
+              
               <Route path="/about" element={<About />} />
+              <Route path="/about/vision-mission" element={<About />} />
+              <Route path="/about/principal" element={<About />} />
+              
               <Route path="/academics" element={<Academics />} />
+              <Route path="/academics/curriculum" element={<Academics />} />
+              <Route path="/academics/calendar" element={<Academics />} />
+              
               <Route path="/students" element={<Students />} />
+              <Route path="/students/clubs" element={<Students />} />
+              <Route path="/students/achievements" element={<Students />} />
+              
               <Route path="/teachers" element={<Teachers />} />
+              <Route path="/teachers/training" element={<Teachers />} />
+              
               <Route path="/admission" element={<Admission />} />
+              <Route path="/admission/eligibility" element={<Admission />} />
+              <Route path="/admission/documents" element={<Admission />} />
+              
               <Route path="/gallery" element={<Gallery />} />
+              <Route path="/gallery/videos" element={<Gallery />} />
+              <Route path="/gallery/events" element={<Gallery />} />
+              
               <Route path="/news" element={<News />} />
+              <Route path="/news/events" element={<News />} />
+              <Route path="/news/media" element={<News />} />
+              
               <Route path="/contact" element={<Contact />} />
               <Route path="/contact/map" element={<Contact />} />
               <Route path="/contact/reach-us" element={<Contact />} />
               <Route path="/contact/feedback" element={<ContactFeedback />} />
+              
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

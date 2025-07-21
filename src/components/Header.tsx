@@ -14,26 +14,103 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const navigation = [
-    { name: "Home", href: "/" },
-    { name: "About Us", href: "/about" },
-    { name: "Academics", href: "/academics" },
-    { name: "Students", href: "/students" },
-    { name: "Teachers", href: "/teachers" },
-    { name: "Admission", href: "/admission" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "News", href: "/news" },
+  const navigationItems = [
+    {
+      label: "Home",
+      path: "/",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Dashboard", path: "/" },
+        { label: "Welcome Message", path: "/welcome" },
+      ]
+    },
+    {
+      label: "About Us",
+      path: "/about",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "About School", path: "/about" },
+        { label: "Vision & Mission", path: "/about/vision-mission" },
+        { label: "Principal's Desk", path: "/about/principal" },
+      ]
+    },
+    {
+      label: "Academics",
+      path: "/academics",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Academic Programs", path: "/academics" },
+        { label: "Curriculum", path: "/academics/curriculum" },
+        { label: "Academic Calendar", path: "/academics/calendar" },
+      ]
+    },
+    {
+      label: "Students",
+      path: "/students",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Student Life", path: "/students" },
+        { label: "Clubs", path: "/students/clubs" },
+        { label: "Achievements", path: "/students/achievements" },
+      ]
+    },
+    {
+      label: "Teachers",
+      path: "/teachers",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Our Teachers", path: "/teachers" },
+        { label: "Teacher Training", path: "/teachers/training" },
+      ]
+    },
+    {
+      label: "Admission",
+      path: "/admission",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Process", path: "/admission" },
+        { label: "Eligibility", path: "/admission/eligibility" },
+        { label: "Documents", path: "/admission/documents" },
+      ]
+    },
+    {
+      label: "Gallery",
+      path: "/gallery",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Photos", path: "/gallery" },
+        { label: "Videos", path: "/gallery/videos" },
+        { label: "Events", path: "/gallery/events" },
+      ]
+    },
+    {
+      label: "News",
+      path: "/news",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Latest News", path: "/news" },
+        { label: "Events", path: "/news/events" },
+        { label: "Media", path: "/news/media" },
+      ]
+    },
+    {
+      label: "Contact",
+      path: "/contact",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Contact Form", path: "/contact" },
+        { label: "Location & Map", path: "/contact/map" },
+        { label: "Reach Us", path: "/contact/reach-us" },
+        { label: "Feedback", path: "/contact/feedback" },
+      ]
+    },
   ];
 
-  const contactItems = [
-    { name: "Contact Form", href: "/contact" },
-    { name: "Location & Map", href: "/contact/map" },
-    { name: "Reach Us", href: "/contact/reach-us" },
-    { name: "Feedback", href: "/contact/feedback" },
-  ];
-
-  const isActive = (href: string) => location.pathname === href;
-  const isContactActive = contactItems.some(item => location.pathname === item.href);
+  const isActive = (path: string) => location.pathname === path;
+  
+  const isParentActive = (item: typeof navigationItems[0]) => {
+    return item.dropdownItems.some(dropdownItem => location.pathname === dropdownItem.path);
+  };
 
   return (
     <header className="bg-white shadow-sm border-b">
@@ -71,52 +148,39 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive(item.href)
-                    ? "bg-school-primary text-school-text-light"
-                    : "text-foreground hover:bg-school-primary/10 hover:text-school-primary"
-                }`}
-              >
-                {item.name}
-              </Link>
+            {navigationItems.map((item) => (
+              <DropdownMenu key={item.label}>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1 ${
+                      isParentActive(item)
+                        ? "bg-school-primary text-school-text-light"
+                        : "text-foreground hover:bg-school-primary/10 hover:text-school-primary"
+                    }`}
+                  >
+                    {item.label}
+                    <ChevronDown className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  {item.dropdownItems.map((dropdownItem) => (
+                    <DropdownMenuItem key={dropdownItem.label} asChild>
+                      <Link
+                        to={dropdownItem.path}
+                        className={`w-full ${
+                          isActive(dropdownItem.path)
+                            ? "bg-school-primary/10 text-school-primary font-medium"
+                            : ""
+                        }`}
+                      >
+                        {dropdownItem.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             ))}
-            
-            {/* Contact Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1 ${
-                    isContactActive
-                      ? "bg-school-primary text-school-text-light"
-                      : "text-foreground hover:bg-school-primary/10 hover:text-school-primary"
-                  }`}
-                >
-                  Contact
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                {contactItems.map((item) => (
-                  <DropdownMenuItem key={item.name} asChild>
-                    <Link
-                      to={item.href}
-                      className={`w-full ${
-                        isActive(item.href)
-                          ? "bg-school-primary/10 text-school-primary font-medium"
-                          : ""
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
           </nav>
 
           {/* Mobile menu button */}
@@ -138,41 +202,27 @@ const Header = () => {
         {isMobileMenuOpen && (
           <nav className="lg:hidden pb-4">
             <div className="flex flex-col space-y-2">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    isActive(item.href)
-                      ? "bg-school-primary text-school-text-light"
-                      : "text-foreground hover:bg-school-primary/10 hover:text-school-primary"
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              
-              {/* Mobile Contact Section */}
-              <div className="pt-2">
-                <div className="px-4 py-2 text-sm font-medium text-muted-foreground">
-                  Contact
+              {navigationItems.map((item) => (
+                <div key={item.label}>
+                  <div className="px-4 py-2 text-sm font-medium text-muted-foreground">
+                    {item.label}
+                  </div>
+                  {item.dropdownItems.map((dropdownItem) => (
+                    <Link
+                      key={dropdownItem.label}
+                      to={dropdownItem.path}
+                      className={`pl-6 pr-4 py-2 rounded-md text-sm font-medium transition-colors block ${
+                        isActive(dropdownItem.path)
+                          ? "bg-school-primary text-school-text-light"
+                          : "text-foreground hover:bg-school-primary/10 hover:text-school-primary"
+                      }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {dropdownItem.label}
+                    </Link>
+                  ))}
                 </div>
-                {contactItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`pl-6 pr-4 py-2 rounded-md text-sm font-medium transition-colors block ${
-                      isActive(item.href)
-                        ? "bg-school-primary text-school-text-light"
-                        : "text-foreground hover:bg-school-primary/10 hover:text-school-primary"
-                    }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
+              ))}
             </div>
           </nav>
         )}

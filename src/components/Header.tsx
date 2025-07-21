@@ -1,8 +1,14 @@
 
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, GraduationCap, Phone, Mail } from "lucide-react";
+import { Menu, X, GraduationCap, Phone, Mail, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,10 +23,17 @@ const Header = () => {
     { name: "Admission", href: "/admission" },
     { name: "Gallery", href: "/gallery" },
     { name: "News", href: "/news" },
-    { name: "Contact", href: "/contact" },
+  ];
+
+  const contactItems = [
+    { name: "Contact Form", href: "/contact" },
+    { name: "Location & Map", href: "/contact/map" },
+    { name: "Reach Us", href: "/contact/reach-us" },
+    { name: "Feedback", href: "/contact/feedback" },
   ];
 
   const isActive = (href: string) => location.pathname === href;
+  const isContactActive = contactItems.some(item => location.pathname === item.href);
 
   return (
     <header className="bg-white shadow-sm border-b">
@@ -71,6 +84,39 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
+            
+            {/* Contact Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1 ${
+                    isContactActive
+                      ? "bg-school-primary text-school-text-light"
+                      : "text-foreground hover:bg-school-primary/10 hover:text-school-primary"
+                  }`}
+                >
+                  Contact
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                {contactItems.map((item) => (
+                  <DropdownMenuItem key={item.name} asChild>
+                    <Link
+                      to={item.href}
+                      className={`w-full ${
+                        isActive(item.href)
+                          ? "bg-school-primary/10 text-school-primary font-medium"
+                          : ""
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
 
           {/* Mobile menu button */}
@@ -106,6 +152,27 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* Mobile Contact Section */}
+              <div className="pt-2">
+                <div className="px-4 py-2 text-sm font-medium text-muted-foreground">
+                  Contact
+                </div>
+                {contactItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`pl-6 pr-4 py-2 rounded-md text-sm font-medium transition-colors block ${
+                      isActive(item.href)
+                        ? "bg-school-primary text-school-text-light"
+                        : "text-foreground hover:bg-school-primary/10 hover:text-school-primary"
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </nav>
         )}

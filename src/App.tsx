@@ -68,7 +68,8 @@ const App = () => (
           <Header />
           <main className="flex-1">
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Index />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/welcome" element={<WelcomeMessage />} />
               
               <Route path="/about" element={<AboutSchool />} />

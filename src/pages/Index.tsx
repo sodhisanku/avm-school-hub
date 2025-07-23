@@ -6,10 +6,36 @@ import schoolHeroBg from "@/assets/school-hero-bg.jpg";
 
 const Index = () => {
   const announcements = [
-    { date: "Dec 15, 2024", title: "शीतकालीन अवकाश सूचना", type: "Holiday" },
-    { date: "Dec 10, 2024", title: "वार्षिक खेल दिवस 2024", type: "Event" },
-    { date: "Dec 5, 2024", title: "अभिभावक-शिक्षक मिलन", type: "Meeting" },
-    { date: "Nov 28, 2024", title: "मध्यावधि परीक्षा परिणाम", type: "Academic" },
+    { 
+      date: "2 hours ago", 
+      title: "Classes Resumed After Winter Break - Welcome Back Students!", 
+      type: "🔔 Alert",
+      description: "All students and faculty are requested to follow the updated safety protocols."
+    },
+    { 
+      date: "1 day ago", 
+      title: "Annual Sports Day 2024 - Registration Open", 
+      type: "🏆 Event",
+      description: "Register for inter-house competitions. Last date: January 20th, 2025."
+    },
+    { 
+      date: "3 days ago", 
+      title: "Parent-Teacher Meeting Scheduled", 
+      type: "📅 Meeting",
+      description: "Individual consultations available. Please book your slot in advance."
+    },
+    { 
+      date: "1 week ago", 
+      title: "Mid-Term Examination Results Published", 
+      type: "📊 Academic",
+      description: "Results are now available on the student portal. Contact office for queries."
+    },
+    { 
+      date: "2 weeks ago", 
+      title: "New Library Books Added - 500+ Titles Available", 
+      type: "📚 Update",
+      description: "Latest academic and fiction books now available for issue."
+    },
   ];
 
   const quickFeatures = [
@@ -102,13 +128,25 @@ const Index = () => {
                 <CardContent>
                   <div className="space-y-4">
                     {announcements.map((announcement, index) => (
-                      <div key={index} className="flex items-start space-x-4 p-4 bg-background rounded-lg hover:shadow-md transition-shadow">
-                        <div className="bg-school-primary text-school-text-light px-3 py-1 rounded-full text-xs font-semibold min-w-max">
+                      <div key={index} className="relative flex items-start space-x-4 p-4 bg-background rounded-lg border-l-4 border-school-primary hover:shadow-lg transition-all duration-200 hover:transform hover:scale-[1.02]">
+                        {index === 0 && (
+                          <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                        )}
+                        <div className="bg-gradient-to-r from-school-primary to-school-secondary text-school-text-light px-3 py-1 rounded-full text-xs font-semibold min-w-max shadow-sm">
                           {announcement.type}
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-semibold text-foreground mb-1">{announcement.title}</h4>
-                          <p className="text-sm text-muted-foreground">{announcement.date}</p>
+                          <h4 className="font-semibold text-foreground mb-1 hover:text-school-primary transition-colors cursor-pointer">{announcement.title}</h4>
+                          <p className="text-sm text-muted-foreground mb-2">{announcement.description}</p>
+                          <div className="flex items-center justify-between">
+                            <p className="text-xs text-muted-foreground flex items-center">
+                              <Bell className="w-3 h-3 mr-1" />
+                              {announcement.date}
+                            </p>
+                            {index < 2 && (
+                              <span className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full font-medium">New</span>
+                            )}
+                          </div>
                         </div>
                       </div>
                     ))}
